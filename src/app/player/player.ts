@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-player',
-  //standalone: false,
+  standalone: false,
   templateUrl: './player.html',
   styleUrl: './player.css'
 })
