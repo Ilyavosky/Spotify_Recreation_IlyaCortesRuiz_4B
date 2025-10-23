@@ -1,5 +1,6 @@
 import { NgModule, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common'; // Import CommonModule
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
@@ -23,6 +24,7 @@ import { SearchModule } from './search/search-module';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     SearchModule
   ],
