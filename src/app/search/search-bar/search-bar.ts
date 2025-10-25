@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SpotifySearchService } from '../services/spotify-api/spotify-search-service';
 import { SearchStateService } from '../../services/state/search-state.service';
 
@@ -13,7 +14,8 @@ export class SearchBar {
   
   constructor(
     private _spotifySearch: SpotifySearchService,
-    private searchStateService: SearchStateService
+    private searchStateService: SearchStateService,
+    private router: Router
   ){}
 
   doSearch(): void{
@@ -25,10 +27,12 @@ export class SearchBar {
       return;
     }
 
+    this.router.navigate(['/browse']);
+
     console.log('SearchBar: Starting search...');
     this.searchStateService.setLoading(true);
     
-      this._spotifySearch.doSearch(this.searchQuery).subscribe({
+    this._spotifySearch.doSearch(this.searchQuery).subscribe({
       next: (data) => {
         this.searchStateService.updateResults(data);
       },
@@ -38,4 +42,4 @@ export class SearchBar {
       }
     });
   }
-} 
+}

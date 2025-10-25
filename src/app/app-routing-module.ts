@@ -13,7 +13,7 @@ const routes: Routes = [
     title: 'Home'
   },
   {
-    path: '',
+    path: 'browse',
     component: BrowseComponent,
     title: 'Browse Music'
   },
