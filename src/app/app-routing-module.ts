@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Player } from './player/player';
-//import { AudioController } from './audio-controller/audio-controller';
 import { BrowseComponent } from './views/browse/browse';
 import { HomeComponent } from './views/home/home';
 

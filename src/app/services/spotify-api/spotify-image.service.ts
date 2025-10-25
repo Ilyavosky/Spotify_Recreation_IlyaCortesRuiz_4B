@@ -14,13 +14,12 @@ export class SpotifyImageService {
 
   constructor() { }
 
-
   getImageUrl(spotifyUrl: string | undefined, size: 'large' | 'medium' | 'small' | 'tiny' = 'medium'): string {
     if (!spotifyUrl) {
       return this.placeholders[size];
     }
 
-  
+
     if (spotifyUrl.includes('i.scdn.co')) {
       const alternativeUrl = spotifyUrl.replace('i.scdn.co', 'mosaic.scdn.co');
       return alternativeUrl;
@@ -34,7 +33,7 @@ export class SpotifyImageService {
     return this.placeholders[size];
   }
 
-
+ 
   handleImageError(event: Event, size: 'large' | 'medium' | 'small' | 'tiny' = 'medium'): void {
     const img = event.target as HTMLImageElement;
     if (img) {
@@ -45,7 +44,7 @@ export class SpotifyImageService {
     }
   }
 
- 
+
   async preloadImage(url: string): Promise<string> {
     return new Promise((resolve) => {
       const img = new Image();
