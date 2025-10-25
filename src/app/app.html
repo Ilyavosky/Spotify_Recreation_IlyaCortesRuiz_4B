@@ -1,7 +1,11 @@
 <div class="app-header">
   <h1>Browse Spotify</h1>
   <p class="subtitle">Enter a search query above to find albums and tracks.</p>
-<app-search-bar></app-search-bar>
+  <div class="navigation">
+    <button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</button>
+    <button routerLink="/browse" routerLinkActive="active">Browse</button>
+  </div>
+  <app-search-bar></app-search-bar>
 </div>
 
 <main class="content">
