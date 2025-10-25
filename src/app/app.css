@@ -6,3 +6,28 @@
     justify-content: space-around;
     align-items: center;
 }
+
+.app-header {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0 10px 0;
+    background-color: #fff;
+}
+
+.app-header h1 {
+    margin: 0 0 10px 0;
+    font-size: 2em;
+}
+
+.subtitle {
+    margin: 0 0 15px 0;
+    color: #666;
+    font-size: 0.95em;
+}
+
+.content {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+}

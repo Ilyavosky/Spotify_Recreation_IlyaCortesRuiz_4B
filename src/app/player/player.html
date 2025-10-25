@@ -1,35 +1,117 @@
-<div class="player-header">
-  <button class="back-button" routerLink="/">
-    <i class="fa-solid fa-arrow-left"></i>
-    Back to Browse
-  </button>
-</div>
-
-@if (isLoading) {
-  <div class="loading-indicator">Loading album details...</div>
-}
-
-@if (hasError && !isLoading) {
-  <div class="error-message">Could not load the album. Please try again or select another one.</div>
-}
-
-@if (album$ | async; as album) {
-  @if (album && !isLoading && !hasError) {
-    <div id="main">
-      <app-song-info
-          [song]="album.tracks[0]"
-          [cover]="album.images[0]"
-          displayMode="main">
-      </app-song-info>
-
-      <app-playlist
-          [playlist]="album.tracks.slice(1)"
-          [cover]="album.images[1] || album.images[0]"> 
-      </app-playlist>
+<div class="player-wrapper">
+  <div class="player-main">
+    <div class="player-header">
+      <button class="back-button" routerLink="/">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Browse
+      </button>
     </div>
-  } @else if (!isLoading && !hasError) {
-     <div>Please select an album from the browse page.</div>
-  }
-} @else if (!isLoading && !hasError) {
-    <div>Please select an album.</div>
-}
+
+    @if (isLoading) {
+      <div class="loading-indicator">Loading album details...</div>
+    }
+
+    @if (hasError && !isLoading) {
+      <div class="error-message">Could not load the album. Please try again or select another one.</div>
+    }
+
+    @if (album$ | async; as album) {
+      @if (album && !isLoading && !hasError) {
+        <div id="main">
+          <app-song-info
+              [song]="album.tracks[0]"
+              [cover]="album.images[0]"
+              displayMode="main">
+          </app-song-info>
+
+          <app-playlist
+              [playlist]="album.tracks.slice(1)"
+              [cover]="album.images[1] || album.images[0]">
+          </app-playlist>
+        </div>
+      } @else if (!isLoading && !hasError) {
+        <div>Please select an album from the browse page.</div>
+      }
+    } @else if (!isLoading && !hasError) {
+      <div>Please select an album.</div>
+    }
+  </div>
+
+  <aside class="static-playlist">
+    <h3>Featured Playlist</h3>
+    <ul class="playlist-items">
+      <li class="playlist-item">
+        <img src="https://i.scdn.co/image/ab67616d0000485151c02c5fdea616ad3d5d904e" alt="Money Trees" class="playlist-cover">
+        <div class="track-info">
+          <p class="track-name">Money Trees</p>
+          <p class="track-artist">Kendrick Lamar, Jay Rock</p>
+        </div>
+        <span class="track-duration">6:27</span>
+      </li>
+      <li class="playlist-item">
+        <img src="https://i.scdn.co/image/ab67616d00004851881d8d8378cd01099babcd44" alt="I KNOW" class="playlist-cover">
+        <div class="track-info">
+          <p class="track-name">I KNOW ?</p>
+          <p class="track-artist">Travis Scott</p>
+        </div>
+        <span class="track-duration">3:32</span>
+      </li>
+      <li class="playlist-item">
+        <img src="https://i.scdn.co/image/ab67616d00004851a5e14fce624e8639bfbddf15" alt="Gnat" class="playlist-cover">
+        <div class="track-info">
+          <p class="track-name">Gnat</p>
+          <p class="track-artist">Eminem</p>
+        </div>
+        <span class="track-duration">3:45</span>
+      </li>
+      <li class="playlist-item">
+        <img src="https://i.scdn.co/image/ab67616d00004851908005950913e62b24340d3c" alt="DNA" class="playlist-cover">
+        <div class="track-info">
+          <p class="track-name">DNA.</p>
+          <p class="track-artist">Kendrick Lamar</p>
+        </div>
+        <span class="track-duration">3:06</span>
+      </li>
+      <li class="playlist-item">
+        <img src="https://i.scdn.co/image/ab67616d00004851a5c512b5187f6e99fd7e2ad5" alt="St. Chroma" class="playlist-cover">
+        <div class="track-info">
+          <p class="track-name">St. Chroma (feat. Daniel Caesar)</p>
+          <p class="track-artist">Tyler, The Creator</p>
+        </div>
+        <span class="track-duration">3:17</span>
+      </li>
+      <li class="playlist-item">
+        <img src="https://i.scdn.co/image/ab67616d0000485150d0d069a634a671d4fb8b34" alt="OUT WEST" class="playlist-cover">
+        <div class="track-info">
+          <p class="track-name">OUT WEST (feat. Young Thug)</p>
+          <p class="track-artist">JACKBOYS, Travis Scott</p>
+        </div>
+        <span class="track-duration">2:38</span>
+      </li>
+      <li class="playlist-item">
+        <img src="https://i.scdn.co/image/ab67616d000048515f3ede47954a7a07ac2c799c" alt="Beautiful" class="playlist-cover">
+        <div class="track-info">
+          <p class="track-name">Beautiful</p>
+          <p class="track-artist">Snoop Dogg, Pharrell Williams</p>
+        </div>
+        <span class="track-duration">4:58</span>
+      </li>
+      <li class="playlist-item">
+        <img src="https://i.scdn.co/image/ab67616d00004851a5e14fce624e8639bfbddf15" alt="Farewell" class="playlist-cover">
+        <div class="track-info">
+          <p class="track-name">Farewell</p>
+          <p class="track-artist">Eminem</p>
+        </div>
+        <span class="track-duration">4:08</span>
+      </li>
+      <li class="playlist-item">
+        <img src="https://i.scdn.co/image/ab67616d000048512cd15e5e537e2eeea2f26483" alt="No Role Modelz" class="playlist-cover">
+        <div class="track-info">
+          <p class="track-name">No Role Modelz</p>
+          <p class="track-artist">J. Cole</p>
+        </div>
+        <span class="track-duration">4:53</span>
+      </li>
+    </ul>
+  </aside>
+</div>

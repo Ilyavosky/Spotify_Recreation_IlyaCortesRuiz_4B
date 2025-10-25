@@ -3,6 +3,7 @@
     gap: 20px;
     width: 100%;
     height: 100%;
+    padding: 0 20px;
 }
 
 .main-content {
@@ -10,71 +11,74 @@
     overflow-y: auto;
 }
 
-.initial-message {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.results-container{
+.results-container {
     display: flex;
     flex-direction: row;
     gap: 20px;
-    margin-top: 20px
+    margin-top: 20px;
 }
 
-.results-section{
+.results-section {
     flex: 1;
 }
 
-.results-list{
+.results-section h3 {
+    margin-top: 0;
+}
+
+.results-list {
     list-style: none;
     padding: 0;
 }
 
-.result-item{
+.result-item {
     margin-bottom: 10px;
     padding: 5px;
     border-bottom: 1px solid #eee;
 }
 
-.result-link{
+.result-link {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: inherit;
+    padding: 5px;
+    border-radius: 4px;
 }
 
-.result-link:hover{
+.result-link:hover {
     background-color: #f0f0f0;
 }
 
-.result-image{
+.result-image {
     width: 40px;
     height: 40px;
     margin-right: 10px;
     object-fit: cover;
+    border-radius: 4px;
 }
 
-.result-name{
+.result-name {
     font-weight: bold;
 }
 
 .result-artist {
-   color: #555;
-   margin-left: 5px;
+    color: #555;
+    margin-left: 5px;
 }
 
 .loading-indicator, .error-message {
     margin-top: 20px;
     padding: 10px;
     border-radius: 4px;
+    text-align: center;
 }
 
 .loading-indicator {
     color: #333;
 }
 
-.error-message{
+.error-message {
     color: #D8000C;
     background-color: #FFD2D2;
     border: 1px solid #D8000C;
@@ -86,7 +90,7 @@
     padding: 20px;
     border-radius: 8px;
     overflow-y: auto;
-    max-height: calc(100vh - 200px);
+    max-height: 100%;
 }
 
 .static-playlist h3 {
@@ -108,22 +112,24 @@
     padding: 10px;
     border-bottom: 1px solid #e0e0e0;
     transition: background-color 0.2s;
+    cursor: pointer;
 }
 
 .playlist-item:hover {
     background-color: #e8e8e8;
-    cursor: pointer;
 }
 
-.track-number {
-    min-width: 20px;
-    text-align: center;
-    color: #666;
-    font-size: 0.9em;
+.playlist-cover {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
 }
 
 .track-info {
     flex: 1;
+    min-width: 0;
 }
 
 .track-name {
@@ -131,15 +137,22 @@
     font-weight: 600;
     font-size: 0.95em;
     color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .track-artist {
     margin: 2px 0 0 0;
     font-size: 0.85em;
     color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .track-duration {
     color: #666;
     font-size: 0.9em;
+    flex-shrink: 0;
 }
