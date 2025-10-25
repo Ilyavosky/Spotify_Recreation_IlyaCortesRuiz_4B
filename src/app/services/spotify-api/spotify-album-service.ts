@@ -39,7 +39,7 @@ export class SpotifyAlbumService {
           const mappedImages: Image[] = apiresponse.images.map(
             image => ({
               width: image.width,
-              heigth: image.heigth,
+              height: image.height,
               url: image.url
             })
           );

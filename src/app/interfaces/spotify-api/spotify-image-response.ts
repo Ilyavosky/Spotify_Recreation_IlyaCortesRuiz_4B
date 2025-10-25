@@ -1,7 +1,7 @@
 export interface SpotifyImageResponse {
 
     width: number,
-    heigth: number,
+    height: number,
     url: string
     
 }
