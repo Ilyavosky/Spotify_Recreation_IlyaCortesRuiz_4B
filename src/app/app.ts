@@ -24,7 +24,6 @@ export class App implements OnInit{
       console.log('App Init - Attempting to fetch new access token...');
       this._spotifyLogin.getAccessToken().subscribe({
          next: (response) => {
-             // Token saving is handled by the authInterceptor, just log success
              console.log('App Init - Successfully initiated token fetch.');
          },
          error: (err) => {

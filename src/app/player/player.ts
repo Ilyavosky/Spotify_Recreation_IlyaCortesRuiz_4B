@@ -32,7 +32,7 @@ ngOnInit(): void {
           console.log(`Fetching album with ID: ${albumId}`);
           return this._spotifyAlbum.getAlbum(albumId).pipe(
              catchError(error => {
-               console.error('Error fetching album:', error);
+               console.error('PlayerComponent: Error fetching album details:', error);
                this.hasError = true;
                this.isLoading = false;
                return of(null);
