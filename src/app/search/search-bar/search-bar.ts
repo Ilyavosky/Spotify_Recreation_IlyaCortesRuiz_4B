@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { SpotifySearchService } from '../services/spotify-api/spotify-search-service';
 import { SearchStateService } from '../../services/state/search-state.service';
 
@@ -17,11 +17,17 @@ export class SearchBar {
   ){}
 
   doSearch(): void{
+    console.log('SearchBar: doSearch called with query:', this.searchQuery);
+
     if (this.searchQuery.trim() === '') {
+      console.log('SearchBar: Empty query, clearing results');
       this.searchStateService.updateResults({ albums: { items: [] }, tracks: { items: [] } });
       return;
     }
+
+    console.log('SearchBar: Starting search...');
     this.searchStateService.setLoading(true);
+    
       this._spotifySearch.doSearch(this.searchQuery).subscribe({
       next: (data) => {
         this.searchStateService.updateResults(data);

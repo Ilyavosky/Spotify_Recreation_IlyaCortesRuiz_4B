@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { SpotifyAlbumService } from '../services/spotify-api/spotify-album-service';
 import { Album } from '../interfaces/album';
-import { Observable, switchMap, of, EMPTY } from 'rxjs';
+import { Observable, switchMap, of} from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-player',
@@ -13,41 +13,72 @@ import { catchError } from 'rxjs/operators';
 })
 export class Player implements OnInit{
 
-  album$: Observable<Album | null> | undefined
+  album$: Observable<Album | null> | undefined;
   isLoading: boolean = true;
   hasError: boolean = false;
 
   constructor(
     private _spotifyAlbum: SpotifyAlbumService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ){}
   
 ngOnInit(): void {
     this.album$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        const albumId = params.get('id'); 
+      tap(() =>{
+        console.log('Player: Started loading album');
         this.isLoading = true;
         this.hasError = false;
-        if (albumId) {
-          console.log(`Fetching album with ID: ${albumId}`);
-          return this._spotifyAlbum.getAlbum(albumId).pipe(
-             catchError(error => {
-               console.error('PlayerComponent: Error fetching album details:', error);
-               this.hasError = true;
-               this.isLoading = false;
-               return of(null);
-             })
-          );
-        } else {
-          console.warn('No album ID found in route parameters. Displaying default or empty.');
-          this.isLoading = false;
-          return of(null);
+        this.cdr.detectChanges();
+      }),
+      switchMap((params: ParamMap) => {
+        const albumId = params.get('id'); 
+        
+        if (!albumId) {
+          console.warn('Player: No album ID found in route')
+        this.isLoading = false;
+        this.cdr.detectChanges();
+        return of(null);
         }
+
+        console.log('Player: Loading album with ID:', albumId);
+        console.log('Player: Token on localStorage:', 
+          localStorage.getItem('spotify_token') ? 'Present' : 'MISSING');
+
+        return this._spotifyAlbum.getAlbum(albumId).pipe(
+          tap(album => {
+            console.log('Player: Album received:', album);
+          }),
+          catchError(error => {
+            console.error('Player: Error loading album:', {
+              status: error.status,
+              statusText: error.statusText,
+              url: error.url,
+              message: error.message,
+              fullError: error
+            });
+            this.hasError = true;
+            this.cdr.detectChanges();
+            return of(null);
+          }),
+          finalize(() => {
+            this.isLoading = false;
+            console.log('Player: Load finished. isLoading=false, hasError=', this.hasError);
+            this.cdr.detectChanges();
+          })
+        );
       })
     );
 
-    this.album$.subscribe(album => {
-        this.isLoading = false;
+    this.album$.subscribe({
+      next: album => {
+        console.log('Player: Final state:', { album, isLoading: this.isLoading, hasError: this.hasError });
+        this.cdr.detectChanges();
+      },
+      error: err => {
+        console.error('Player: Error in subscription:', err);
+                this.cdr.detectChanges();
+      }
     });
   }
 }

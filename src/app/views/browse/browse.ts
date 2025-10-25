@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchModule } from '../../search/search-module';
 import { RouterLink} from '@angular/router';
 import { SearchStateService } from '../../services/state/search-state.service';
 import { Subscription } from 'rxjs';
@@ -10,7 +9,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './browse.html',
   styleUrls: ['./browse.css']
@@ -22,27 +21,32 @@ export class BrowseComponent implements OnInit, OnDestroy{
 
   private subscriptions = new Subscription();
 
- constructor(private searchStateService: SearchStateService) { }
+ constructor(private searchStateService: SearchStateService,
+  private cdr: ChangeDetectorRef
+ ) { }
 
 ngOnInit(): void {
     this.subscriptions.add(
-        this.searchStateService.searchResults$.subscribe(results => {
-          this.results = results;
-          console.log('BrowseComponent received results via service:', results);
-        })
+      this.searchStateService.searchResults$.subscribe(results => {
+        this.results = results;
+        console.log('BrowseComponent received results via service:', results);
+        this.cdr.detectChanges();
+      })
     );
     this.subscriptions.add(
-        this.searchStateService.isLoading$.subscribe(loading => {
-          this.isLoading = loading;
-          console.log('BrowseComponent isLoading via service:', loading);
-        })
+      this.searchStateService.isLoading$.subscribe(loading => {
+        this.isLoading = loading;
+        console.log('BrowseComponent isLoading via service:', loading);
+        this.cdr.detectChanges();
+      })
     );
-     this.subscriptions.add(
-        this.searchStateService.hasError$.subscribe(error => {
-          this.hasError = error;
-           console.log('BrowseComponent hasError via service:', error);
-        })
-     );
+    this.subscriptions.add(
+      this.searchStateService.hasError$.subscribe(error => {
+        this.hasError = error;
+        console.log('BrowseComponent hasError via service:', error);
+        this.cdr.detectChanges();
+      })
+    );
   }
 
   ngOnDestroy(): void {
