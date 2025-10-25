@@ -1,60 +1,4 @@
 <div class="browse-container">
-  <div class="main-content">
-    @if (isLoading) {
-      <div class="loading-indicator">
-        <p>Loading...</p>
-      </div>
-    }
-
-    @if (hasError) {
-      <div class="error-message">
-        <p>Sorry, something went wrong with the search. Please try again.</p>
-      </div>
-    }
-
-    @if (results && !isLoading && !hasError && (results.albums?.items?.length > 0 || results.tracks?.items?.length > 0)) {
-      <div class="results-container">
-        <section class="results-section">
-          <h3>Albums</h3>
-          @if (results.albums && results.albums.items && results.albums.items.length > 0) {
-            <ul class="results-list">
-              @for (album of results.albums.items; track album.id) {
-                <li class="result-item">
-                  <a [routerLink]="['/album', album.id]" class="result-link">
-                    <img [src]="album.images[2]?.url || album.images[1]?.url || album.images[0]?.url"
-                         alt="{{album.name}} cover" class="result-image">
-                    <span class="result-name">{{ album.name }}</span>
-                    <span class="result-artist"> - {{ album.artists[0]?.name }}</span>
-                  </a>
-                </li>
-              }
-            </ul>
-          } @else {
-            <p>No albums found for your search.</p>
-          }
-        </section>
-
-        <section class="results-section">
-          <h3>Tracks</h3>
-          @if (results.tracks && results.tracks.items && results.tracks.items.length > 0) {
-            <ul class="results-list">
-              @for (track of results.tracks.items; track track.id) {
-                <li class="result-item">
-                  <img [src]="track.album?.images[2]?.url || track.album?.images[1]?.url || track.album?.images[0]?.url"
-                       alt="{{track.album?.name}} cover" class="result-image">
-                  <span class="result-name">{{ track.name }}</span>
-                  <span class="result-artist"> - {{ track.artists[0]?.name }}</span>
-                </li>
-              }
-            </ul>
-          } @else {
-            <p>No tracks found for your search.</p>
-          }
-        </section>
-      </div>
-    }
-  </div>
-
   <aside class="static-playlist">
     <h3>Featured Playlist</h3>
     <ul class="playlist-items">
@@ -132,4 +76,60 @@
       </li>
     </ul>
   </aside>
+
+  <div class="main-content">
+    @if (isLoading) {
+      <div class="loading-indicator">
+        <p>Loading...</p>
+      </div>
+    }
+
+    @if (hasError) {
+      <div class="error-message">
+        <p>Sorry, something went wrong with the search. Please try again.</p>
+      </div>
+    }
+
+    @if (results && !isLoading && !hasError && (results.albums?.items?.length > 0 || results.tracks?.items?.length > 0)) {
+      <div class="results-container">
+        <section class="results-section">
+          <h3>Albums</h3>
+          @if (results.albums && results.albums.items && results.albums.items.length > 0) {
+            <ul class="results-list">
+              @for (album of results.albums.items; track album.id) {
+                <li class="result-item">
+                  <a [routerLink]="['/album', album.id]" class="result-link">
+                    <img [src]="album.images[2]?.url || album.images[1]?.url || album.images[0]?.url"
+                         alt="{{album.name}} cover" class="result-image">
+                    <span class="result-name">{{ album.name }}</span>
+                    <span class="result-artist"> - {{ album.artists[0]?.name }}</span>
+                  </a>
+                </li>
+              }
+            </ul>
+          } @else {
+            <p>No albums found for your search.</p>
+          }
+        </section>
+
+        <section class="results-section">
+          <h3>Tracks</h3>
+          @if (results.tracks && results.tracks.items && results.tracks.items.length > 0) {
+            <ul class="results-list">
+              @for (track of results.tracks.items; track track.id) {
+                <li class="result-item">
+                  <img [src]="track.album?.images[2]?.url || track.album?.images[1]?.url || track.album?.images[0]?.url"
+                       alt="{{track.album?.name}} cover" class="result-image">
+                  <span class="result-name">{{ track.name }}</span>
+                  <span class="result-artist"> - {{ track.artists[0]?.name }}</span>
+                </li>
+              }
+            </ul>
+          } @else {
+            <p>No tracks found for your search.</p>
+          }
+        </section>
+      </div>
+    }
+  </div>
 </div>

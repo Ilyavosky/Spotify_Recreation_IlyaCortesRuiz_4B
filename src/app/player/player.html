@@ -1,42 +1,4 @@
 <div class="player-wrapper">
-  <div class="player-main">
-    <div class="player-header">
-      <button class="back-button" routerLink="/">
-        <i class="fa-solid fa-arrow-left"></i>
-        Back to Browse
-      </button>
-    </div>
-
-    @if (isLoading) {
-      <div class="loading-indicator">Loading album details...</div>
-    }
-
-    @if (hasError && !isLoading) {
-      <div class="error-message">Could not load the album. Please try again or select another one.</div>
-    }
-
-    @if (album$ | async; as album) {
-      @if (album && !isLoading && !hasError) {
-        <div id="main">
-          <app-song-info
-              [song]="album.tracks[0]"
-              [cover]="album.images[0]"
-              displayMode="main">
-          </app-song-info>
-
-          <app-playlist
-              [playlist]="album.tracks.slice(1)"
-              [cover]="album.images[1] || album.images[0]">
-          </app-playlist>
-        </div>
-      } @else if (!isLoading && !hasError) {
-        <div>Please select an album from the browse page.</div>
-      }
-    } @else if (!isLoading && !hasError) {
-      <div>Please select an album.</div>
-    }
-  </div>
-
   <aside class="static-playlist">
     <h3>Featured Playlist</h3>
     <ul class="playlist-items">
@@ -114,4 +76,42 @@
       </li>
     </ul>
   </aside>
+
+  <div class="player-main">
+    <div class="player-header">
+      <button class="back-button" routerLink="/">
+        <i class="fa-solid fa-left-long"></i>
+        Back to Browse
+      </button>
+    </div>
+
+    @if (isLoading) {
+      <div class="loading-indicator">Loading album details...</div>
+    }
+
+    @if (hasError && !isLoading) {
+      <div class="error-message">Could not load the album. Please try again or select another one.</div>
+    }
+
+    @if (album$ | async; as album) {
+      @if (album && !isLoading && !hasError) {
+        <div id="main">
+          <app-song-info
+              [song]="album.tracks[0]"
+              [cover]="album.images[0]"
+              displayMode="main">
+          </app-song-info>
+
+          <app-playlist
+              [playlist]="album.tracks.slice(1)"
+              [cover]="album.images[1] || album.images[0]">
+          </app-playlist>
+        </div>
+      } @else if (!isLoading && !hasError) {
+        <div>Please select an album from the browse page.</div>
+      }
+    } @else if (!isLoading && !hasError) {
+      <div>Please select an album.</div>
+    }
+  </div>
 </div>
