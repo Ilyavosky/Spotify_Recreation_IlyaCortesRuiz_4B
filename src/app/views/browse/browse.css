@@ -1,3 +1,20 @@
+.browse-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.initial-message {
+    margin-top: 20px;
+    text-align: center;
+}
+
 .results-container{
     display: flex;
     flex-direction: row;
@@ -61,4 +78,68 @@
     color: #D8000C;
     background-color: #FFD2D2;
     border: 1px solid #D8000C;
+}
+
+.static-playlist {
+    width: 350px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+}
+
+.static-playlist h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.playlist-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.playlist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s;
+}
+
+.playlist-item:hover {
+    background-color: #e8e8e8;
+    cursor: pointer;
+}
+
+.track-number {
+    min-width: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.track-info {
+    flex: 1;
+}
+
+.track-name {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.95em;
+    color: #000;
+}
+
+.track-artist {
+    margin: 2px 0 0 0;
+    font-size: 0.85em;
+    color: #666;
+}
+
+.track-duration {
+    color: #666;
+    font-size: 0.9em;
 }

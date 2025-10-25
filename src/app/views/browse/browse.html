@@ -1,4 +1,12 @@
+<div class="browse-container">
+  <div class="main-content">
 <h2>Browse Spotify</h2>
+
+@if (!results || (results.albums?.items?.length === 0 && results.tracks?.items?.length === 0)) {
+    <div class="initial-message">
+      <p>Enter a search query above to find albums and tracks.</p>
+        </div>
+}
 
 @if (isLoading) {
   <div class="loading-indicator">
@@ -12,7 +20,7 @@
   </div>
 }
 
-@if (results && !isLoading && !hasError) {
+@if (results && !isLoading && !hasError && (results.albums?.items?.length > 0 || results.tracks?.items?.length > 0)) {
   <div class="results-container">
     <section class="results-section">
       <h3>Albums</h3>
@@ -52,8 +60,84 @@
       }
     </section>
   </div>
-} @else if (!isLoading && !hasError) {
-  <div>
-    <p>Enter a search query above to find albums and tracks.</p>
-  </div>
 }
+</div>
+
+<aside class="static-playlist">
+    <h3>Featured Playlist</h3>
+    <ul class="playlist-items">
+      <li class="playlist-item">
+        <span class="track-number">1</span>
+        <div class="track-info">
+          <p class="track-name">Money Trees</p>
+          <p class="track-artist">Kendrick Lamar, Jay Rock</p>
+        </div>
+        <span class="track-duration">6:27</span>
+      </li>
+      <li class="playlist-item">
+        <span class="track-number">2</span>
+        <div class="track-info">
+          <p class="track-name">I KNOW ?</p>
+          <p class="track-artist">Travis Scott</p>
+        </div>
+        <span class="track-duration">3:32</span>
+      </li>
+      <li class="playlist-item">
+        <span class="track-number">3</span>
+        <div class="track-info">
+          <p class="track-name">Gnat</p>
+          <p class="track-artist">Eminem</p>
+        </div>
+        <span class="track-duration">3:45</span>
+      </li>
+      <li class="playlist-item">
+        <span class="track-number">4</span>
+        <div class="track-info">
+          <p class="track-name">DNA.</p>
+          <p class="track-artist">Kendrick Lamar</p>
+        </div>
+        <span class="track-duration">3:06</span>
+      </li>
+      <li class="playlist-item">
+        <span class="track-number">5</span>
+        <div class="track-info">
+          <p class="track-name">St. Chroma (feat. Daniel Caesar)</p>
+          <p class="track-artist">Tyler, The Creator, Daniel Caesar</p>
+        </div>
+        <span class="track-duration">3:17</span>
+      </li>
+      <li class="playlist-item">
+        <span class="track-number">6</span>
+        <div class="track-info">
+          <p class="track-name">OUT WEST (feat. Young Thug)</p>
+          <p class="track-artist">JACKBOYS, Travis Scott</p>
+        </div>
+        <span class="track-duration">2:38</span>
+      </li>
+      <li class="playlist-item">
+        <span class="track-number">7</span>
+        <div class="track-info">
+          <p class="track-name">Beautiful</p>
+          <p class="track-artist">Snoop Dogg, Pharrell Williams</p>
+        </div>
+        <span class="track-duration">4:58</span>
+      </li>
+      <li class="playlist-item">
+        <span class="track-number">8</span>
+        <div class="track-info">
+          <p class="track-name">Farewell</p>
+          <p class="track-artist">Eminem</p>
+        </div>
+        <span class="track-duration">4:08</span>
+      </li>
+      <li class="playlist-item">
+        <span class="track-number">9</span>
+        <div class="track-info">
+          <p class="track-name">No Role Modelz</p>
+          <p class="track-artist">J. Cole</p>
+        </div>
+        <span class="track-duration">4:53</span>
+      </li>
+    </ul>
+  </aside>
+</div>
