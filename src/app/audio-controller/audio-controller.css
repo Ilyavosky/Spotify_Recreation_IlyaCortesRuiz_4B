@@ -1,25 +1,49 @@
 :host{
     width: 100%;
-    height: 100px;
-    margin-top: 15px;
+    height: 70px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    background-color: #2a1f2a;
+    border-top: 1px solid #8E72A0;
+    color: #E0E0E0;
 }
 
 #control-bar{
-    width: 70%;
+    width: 60%;
+    cursor: pointer;
+    accent-color: #8E72A0;
 }
 
 .player-buttons{
-    width: 50%;
-    height: 100%;
+    width: 40%;
+    height: auto;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding-bottom: 5px;
+}
+
+.player-buttons span {
+    color: #8E72A0;
+    transition: color 0.2s;
+    cursor: pointer;
+}
+
+.player-buttons span:hover {
+    color: #FFFFFF;
 }
 
 .player-buttons span i{
-    font-size: 2em;
+    font-size: 1.5em;
+}
+
+.player-buttons span.play i {
+    font-size: 1.8em;
+    color: #C55C5C;
+}
+.player-buttons span.play:hover i {
+    color: #e08080;
 }

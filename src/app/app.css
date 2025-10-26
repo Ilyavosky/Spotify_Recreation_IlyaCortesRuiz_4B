@@ -3,23 +3,27 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #342334;
 }
 
 .app-header {
     width: 100%;
     text-align: center;
     padding: 20px 0 10px 0;
-    background-color: #fff;
+    background-color: #2a1f2a;
+    border-bottom: 1px solid #8E72A0;
+    flex-shrink: 0;
 }
 
 .app-header h1 {
     margin: 0 0 10px 0;
     font-size: 2em;
+    color: #E0E0E0;
 }
 
 .subtitle {
     margin: 0 0 15px 0;
-    color: #666;
+    color: #a0a0a0;
     font-size: 0.95em;
 }
 
@@ -32,8 +36,9 @@
 
 .navigation button {
     padding: 8px 20px;
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
+    background-color: #4a3a4a;
+    color: #E0E0E0;
+    border: 1px solid #8E72A0;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
@@ -41,20 +46,25 @@
 }
 
 .navigation button:hover {
-    background-color: #e0e0e0;
+    background-color: #8E72A0;
+    color: #FFFFFF;
 }
 
 .navigation button.active {
-    background-color: #333;
-    color: white;
-    border-color: #333;
+    background-color: #8E72A0;
+    color: #FFFFFF;
+    border-color: #8E72A0;
 }
 
 .content {
     flex: 1;
     width: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow-y: auto;
+    overflow-x: center;
+    display: center;
+    background-color: #342334;
+}
+
+app-audio-controller {
+    flex-shrink: 0;
 }
