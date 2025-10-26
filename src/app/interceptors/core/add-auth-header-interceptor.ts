@@ -11,12 +11,13 @@ export const addAuthHeaderInterceptor: HttpInterceptorFn = (req: HttpRequest<unk
     const token = localStorage.getItem('spotify_token');
 
     if (token && token !== '') {
+      console.log('Adding auth header with token:', token.substring(0, 20) + '...');
       const newReq = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`)
       });
       return next(newReq);
     } else {
-      console.error('No se encontró token válido');
+      console.error('No valid token found in localStorage');
       return next(req);
     }
   }

@@ -1,41 +1,3 @@
-/*import { Component, OnInit} from '@angular/core';
-import { SpotifyLoginService } from './services/spotify-api/spotify-login-service';
-import { SpotifyAlbumService } from './services/spotify-api/spotify-album-service';
-import { CookiesStorageService } from './services/general/cookies-storage-service';
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.html',
-  standalone: false,
-  styleUrl: './app.css'
-})
-export class App implements OnInit{
-
-  constructor(
-    private _spotifyLogin: SpotifyLoginService,
-    private _cookieStorage: CookiesStorageService
-  ){}
-
-  ngOnInit(): void {
-    const tokenExists = this._cookieStorage.exists('access_token');
-    const tokenIsValid = this._cookieStorage.isCookieValid('access_token');
-    console.log(`App Init - Token Exists: ${tokenExists}, Token Valid (not empty): ${tokenIsValid}`);
-   if(!tokenExists || !tokenIsValid) {
-      console.log('App Init - Attempting to fetch new access token...');
-      this._spotifyLogin.getAccessToken().subscribe({
-         next: (response) => {
-             console.log('App Init - Successfully initiated token fetch.');
-         },
-         error: (err) => {
-             console.error('App Init - Error fetching access token:', err);
-         }
-      });
-    } else {
-        console.log('App Init - Using existing token from cookies.');
-    }
-  }
-}*/
-
 import { Component, OnInit} from '@angular/core';
 import { SpotifyLoginService } from './services/spotify-api/spotify-login-service';
 
@@ -50,13 +12,19 @@ export class App implements OnInit{
   constructor(private spotifyLogin: SpotifyLoginService){}
 
   ngOnInit(): void {
-    const token = this.spotifyLogin.getStoredToken();
-    
-    if (!token) {
-      this.spotifyLogin.getAccessToken().subscribe({
-        next: () => console.log('Token obtained successfully'),
-        error: (err) => console.error('Error obtaining token:', err)
-      });
-    }
+    this.refreshToken();
+  }
+
+  private refreshToken(): void {
+    console.log('App Init - Refreshing token...');
+    this.spotifyLogin.getAccessToken().subscribe({
+      next: (response) => {
+        console.log('App Init - Token refreshed successfully');
+        console.log('App Init - Token stored:', localStorage.getItem('spotify_token')?.substring(0, 20) + '...');
+      },
+      error: (err) => {
+        console.error('App Init - Error refreshing token:', err);
+      }
+    });
   }
 }
