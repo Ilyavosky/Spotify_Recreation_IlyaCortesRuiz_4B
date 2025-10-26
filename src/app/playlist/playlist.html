@@ -1,4 +1,4 @@
-<h1>
+<!--<h1>
     Queue
 </h1>
 <div class="content">
@@ -6,5 +6,13 @@
         <app-song-info [song]="song" [cover]="cover()" displayMode="card"></app-song-info>
     } @empty {
         
+    }
+</div>-->
+
+<div class="content">
+    @for(song of playlist(); track song.id){
+        <app-song-info [song]="song" [cover]="cover()" displayMode="card"></app-song-info>
+    } @empty {
+        <p class="empty-message">No tracks available</p>
     }
 </div>
