@@ -1,0 +1,39 @@
+<div class="home-wrapper">
+  <div class="content-layout">
+    <div class="main-player">
+      <div class="now-playing">
+        <img 
+          [src]="currentSong.cover || 'https://via.placeholder.com/300x300?text=Default+Cover'" 
+          [alt]="currentSong.name || 'Default Song Cover'" 
+          [title]="currentSong.name || 'Default Song Cover'"
+          class="current-cover"
+          (error)="handleImageError($event)">
+        <div class="song-details">
+          <h2>{{currentSong.name || 'Unknown Song'}}</h2>
+          <h3>{{currentSong.artist || 'Unknown Artist'}}</h3>
+        </div>
+      </div>
+    </div>
+
+    <aside class="static-playlist">
+      <h3>Featured Playlist</h3>
+      <ul class="playlist-items">
+        @for (track of playlist; track track.name) {
+          <li class="playlist-item">
+            <img 
+              [src]="track.cover || 'https://via.placeholder.com/300x300?text=Default+Track'" 
+              [alt]="track.name || 'Default Track Cover'" 
+              [title]="track.name || 'Default Track Cover'"
+              class="playlist-cover"
+              (error)="handleImageError($event)">
+            <div class="track-info">
+              <p class="track-name">{{track.name || 'Unknown Track'}}</p>
+              <p class="track-artist">{{track.artist || 'Unknown Artist'}}</p>
+            </div>
+            <span class="track-duration">{{track.duration || '0:00'}}</span>
+          </li>
+        }
+      </ul>
+    </aside>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="search-container">
+    <div class="search-wrapper">
+        <input 
+            type="text" 
+            [(ngModel)]="searchQuery" 
+            (input)="onSearchInput()"
+            (blur)="hideSuggestions()"
+            (keyup.enter)="doSearch()"
+            id="search-bar"
+            placeholder="Search for albums or tracks..."
+            autocomplete="off">
+        <span id="search-icon" (click)="doSearch()">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+
+        @if (showSuggestions && suggestions.length > 0) {
+            <div class="suggestions-dropdown">
+                @for (suggestion of suggestions; track suggestion.id) {
+                    <div class="suggestion-item" (mousedown)="selectSuggestion(suggestion)">
+                        <img 
+                            [src]="suggestion.image" 
+                            [alt]="suggestion.name"
+                            class="suggestion-image">
+                        <div class="suggestion-info">
+                            <p class="suggestion-name">{{suggestion.name}}</p>
+                            <p class="suggestion-artist">{{suggestion.artist}}</p>
+                        </div>
+                        <span class="suggestion-type">{{suggestion.type}}</span>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
