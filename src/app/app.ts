@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+/*import { Component, OnInit} from '@angular/core';
 import { SpotifyLoginService } from './services/spotify-api/spotify-login-service';
 
 @Component({
@@ -24,6 +24,35 @@ export class App implements OnInit{
       },
       error: (err) => {
         console.error('App Init - Error refreshing token:', err);
+      }
+    });
+  }
+}*/
+
+import { Component, OnInit } from '@angular/core';
+import { AuthenticateUseCase } from './core/domain/use-cases';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.html',
+  standalone: false,
+  styleUrl: './app.css'
+})
+export class App implements OnInit {
+
+  constructor(private authenticateUseCase: AuthenticateUseCase) {}
+
+  ngOnInit(): void {
+    this.refreshToken();
+  }
+
+  private refreshToken(): void {
+    this.authenticateUseCase.execute().subscribe({
+      next: () => {
+        console.log('Token refreshed successfully');
+      },
+      error: (err) => {
+        console.error('Error refreshing token:', err);
       }
     });
   }
